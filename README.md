@@ -1,4 +1,4 @@
-# Forecasting Lab
+# TimesFM-3 benchmarking tool
 
 Benchmark [TimesFM 3.0](https://github.com/google-research/timesfm) — Google's zero-shot foundation model for time series forecasting — against traditional forecasting methods on standard datasets.
 
@@ -19,8 +19,8 @@ python -m benchmark.run --dataset airline
 # M4 Monthly — downloads ~90MB on first run
 python -m benchmark.run --dataset m4 --n-series 3
 
-# Retail sales (weekly) — included example dataset
-python -m benchmark.run --dataset retail --csv-path data/example_retail.csv
+# Retail sales (weekly) — included dataset
+python -m benchmark.run --dataset retail
 
 # Retail sales with your own data
 python -m benchmark.run --dataset retail --csv-path /path/to/your/sales.csv
@@ -41,9 +41,10 @@ Report saved to `results/<dataset>_<timestamp>.html` (e.g. `results/m4_20260902_
 |------|---------|-------------|
 | `--dataset` | `airline` | `airline` (144-point demo), `m4` (48k monthly series), or `retail` (weekly sales) |
 | `--models` | all 5 | Space-separated: `timesfm3 prophet lightgbm ets naive` |
-| `--n-series` | 5 | Number of M4 series to evaluate |
+| `--n-series` | 5 | Number of M4/retail series to evaluate |
 | `--n-folds` | 3 | Rolling-origin CV folds (more = slower, more stable) |
 | `--device` | `cpu` | `cpu`, `cuda` (NVIDIA), or `mps` (Apple Silicon) |
+| `--csv-path` | `data/retail.csv` | Path to retail CSV. Only used with `--dataset retail` |
 | `--output` | auto | Output path. Default: `results/<dataset>_<timestamp>.html` |
 
 ## How It Works
@@ -114,12 +115,12 @@ The retail dataset (`data/retail.csv`, semicolon-separated) contains weekly unit
 
 ```
 Product;week;month;year;unit
-TEST0000T8BMX1;52;12;2025;8.0
+ITEM001;39;10;2021;30.4
 ```
 
 Each unique product becomes its own time series, reindexed to a continuous weekly (`W-MON`) date range. Missing weeks are filled with 0 (no sales). Forecast horizon is 13 weeks (one quarter).
 
-A small example dataset is included at `data/example_retail.csv` (3 products, 156 weeks each) — useful for testing the pipeline without proprietary data. Use `--csv-path` to point to your own data:
+Run the included dataset directly (no `--csv-path` needed). Use `--csv-path` to point to your own data:
 
 ```bash
 python -m benchmark.run --dataset retail --csv-path /path/to/your/sales.csv
