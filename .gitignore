@@ -1,0 +1,32 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+.DS_Store
+.vscode/
+.idea/
+
+*.pkl
+*.tmp
+
+# Generated reports (not source)
+results/*.html
+
+# Cached datasets (not source — M4 downloaded at runtime)
+data/m4_*.csv
+
+# Project tooling state
+.codegraph
+.omo/
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Environment secrets
+.env
+.env.*
