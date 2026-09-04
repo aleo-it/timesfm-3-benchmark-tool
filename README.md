@@ -85,11 +85,11 @@ Two TimesFM 3.0 features are disabled to keep comparison fair:
 
 ### Metrics
 
-| Metric  | Range | Interpretation |
-|--------|---------|-------|----------------|
-| MAE | 0 - ∞ | Average absolute error in original units |
-| RMSE | 0 - ∞ | Penalizes large errors more than MAE |
-| sMAPE | 0 - 200% | Symmetric percentage error, handles zeros |
+| Metric | Range    | Interpretation                              |
+|--------|----------|---------------------------------------------|
+| MAE    | 0 - ∞    | Average absolute error in original units    |
+| RMSE   | 0 - ∞    | Penalizes large errors more than MAE        |
+| sMAPE  | 0 - 200% | Symmetric percentage error, handles zeros   |
 
 We use sMAPE instead of MAPE because MAPE is asymmetric (penalizes under-forecast more) and undefined when actual values are zero.
 
